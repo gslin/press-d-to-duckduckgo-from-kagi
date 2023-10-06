@@ -6,7 +6,7 @@
 // @grant       GM_getValue
 // @grant       GM_registerMenuCommand
 // @grant       GM_setValue
-// @version     0.20220224.0
+// @version     0.20231006.0
 // @author      Gea-Suan Lin <gslin@gslin.com>
 // @description Press "d" to DuckDuckGo from Kagi.
 // @require     https://greasyfork.org/scripts/38445-monkeyconfig/code/MonkeyConfig.js?version=251319
@@ -28,7 +28,7 @@
     });
 
     window.addEventListener('keyup', function(event) {
-        if ('input' === document.activeElement.tagName.toLowerCase()) {
+        if (['input', 'textarea'].indexOf(document.activeElement.tagName.toLowerCase()) >= 0) {
             return;
         }
         if ('d' !== event.key) {
