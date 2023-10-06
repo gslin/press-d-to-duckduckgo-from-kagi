@@ -6,7 +6,7 @@
 // @grant       GM_getValue
 // @grant       GM_registerMenuCommand
 // @grant       GM_setValue
-// @version     0.20231006.0
+// @version     0.20231006.1
 // @author      Gea-Suan Lin <gslin@gslin.com>
 // @description Press "d" to DuckDuckGo from Kagi.
 // @require     https://greasyfork.org/scripts/38445-monkeyconfig/code/MonkeyConfig.js?version=251319
@@ -14,31 +14,31 @@
 // ==/UserScript==
 
 (() => {
-    'use strict';
+  'use strict';
 
-    const cfg = new MonkeyConfig({
-        menuCommand: true,
-        params: {
-            search_engine: {
-                type: 'text',
-                default: 'https://www.duckduckgo.com/?q=',
-            },
-        },
-        title: 'Press "d" to DuckDuckGo in Kagi',
-    });
+  const cfg = new MonkeyConfig({
+    menuCommand: true,
+    params: {
+      search_engine: {
+        type: 'text',
+        default: 'https://www.duckduckgo.com/?q=',
+      },
+    },
+    title: 'Press "d" to DuckDuckGo in Kagi',
+  });
 
-    window.addEventListener('keyup', function(event) {
-        if (['input', 'textarea'].indexOf(document.activeElement.tagName.toLowerCase()) >= 0) {
-            return;
-        }
-        if ('d' !== event.key) {
-            return;
-        }
+  window.addEventListener('keyup', function(event) {
+    if (['input', 'textarea'].indexOf(document.activeElement.tagName.toLowerCase()) >= 0) {
+      return;
+    }
+    if ('d' !== event.key) {
+      return;
+    }
 
-        let q = document.getElementById('searchBar').value;
-        let q_encoded = encodeURIComponent(q).replace(/%20/g, '+');
-        let url = cfg.get('search_engine') + q_encoded;
+    let q = document.getElementById('searchBar').value;
+    let q_encoded = encodeURIComponent(q).replace(/%20/g, '+');
+    let url = cfg.get('search_engine') + q_encoded;
 
-        document.location = url;
-    });
+    document.location = url;
+  });
 })();
